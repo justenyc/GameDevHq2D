@@ -28,9 +28,9 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        try
+        Player p = other.GetComponent<Player>();
+        if (p != null)
         {
-            Player p = other.GetComponent<Player>();
             switch (type)
             {
                 case Type.TripleShot:
@@ -39,17 +39,13 @@ public class Collectible : MonoBehaviour
                     break;
 
                 case Type.Shield:
-                    try
-                    {
-                        if (p.GetComponentsInChildren<Shield_Bubble>().Length < 1)
-                            Instantiate(Shield_Bubble, p.transform.position, Shield_Bubble.transform.rotation, p.gameObject.transform);
+                    Shield_Bubble[] bubbles = p.GetComponentsInChildren<Shield_Bubble>();
+                    if (bubbles.Length < 1)
+                        Instantiate(Shield_Bubble, p.transform.position, Shield_Bubble.transform.rotation, p.gameObject.transform);
+                    else
+                        bubbles[0].AddStrength(1);
 
-                        OnCollect();
-                    }
-                    catch
-                    {
-                        Debug.LogError("Bubble Prefab not found");
-                    }
+                    OnCollect();
                     break;
 
                 case Type.Speed:
@@ -62,10 +58,7 @@ public class Collectible : MonoBehaviour
                     break;
             }
         }
-        catch
-        {
-            Debug.LogError("Player not found");
-        }
+
     }
 
     void OnCollect()

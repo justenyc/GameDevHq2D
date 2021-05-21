@@ -13,13 +13,15 @@ public class UiManager : MonoBehaviour
     TextMeshProUGUI scoreText, GameOverText;
 
     [SerializeField]
-    Image lives_display, GameOverScreen;
+    Image lives_display, shields_display, GameOverScreen;
 
     [SerializeField]
     float currentScore = 0f, enemyScoreValue = 5f, bossScoreValue = 100f;
 
     [SerializeField]
     Sprite[] lives;
+
+    public Image[] test;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +32,7 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         SpawnManager.instance.enemyDeath += EnemyDeathHandler;
+        test = shields_display.GetComponentsInChildren<Image>();
     }
 
     private void Update()
@@ -89,5 +92,22 @@ public class UiManager : MonoBehaviour
     {
         currentScore += value;
         scoreText.text = "Score: " + currentScore;
+    }
+
+    public void UpdateShieldDisplay(int value)
+    {
+        Image[] displays = shields_display.GetComponentsInChildren<Image>();
+
+        try
+        {
+            if (value > 0)
+                displays[value].enabled = true;
+            else
+                displays[-value].enabled = false;
+        }
+        catch
+        {
+            Debug.Log(displays.Length);
+        }
     }
 }
