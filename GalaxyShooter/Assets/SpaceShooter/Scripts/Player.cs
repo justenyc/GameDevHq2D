@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private int lives = 3;
+    [SerializeField] private int lives = 3, ammo = 15;
     [SerializeField] private float moveSpeed = 8, fireRate = 0.5f, boostSpeed = 3;
     private bool canFire = true;
 
@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
 
     }
 
+    public void AddAmmo(int amount)
+    {
+        ammo += amount;
+        ammo = Mathf.Clamp(ammo, 0, 15);
+    }
+
     public void Damage()
     {
         lives -= 1;
@@ -71,18 +77,22 @@ public class Player : MonoBehaviour
 
     void InputListener()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canFire == true)
+        if (ammo > 0)
         {
-            StartCoroutine(FireCooldown());
-        }
+            if (Input.GetKeyDown(KeyCode.Space) && canFire == true)
+            {
+                StartCoroutine(FireCooldown());
+            }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            AddSpeed(boostSpeed);
-        }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            AddSpeed(-boostSpeed);
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                AddSpeed(boostSpeed);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                AddSpeed(-boostSpeed);
+            }
+            UiManager.instance.UpdateAmmoDisplay(ammo);
         }
     }
 
@@ -91,6 +101,7 @@ public class Player : MonoBehaviour
         try
         {
             Instantiate(laser, transform.position + Vector3.up, Quaternion.identity);
+            ammo--;
         }
         catch
         {

@@ -31,6 +31,8 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.LogError("Enemy Prefab in SpawnManager not found");
         }
+
+        StartCoroutine(SpawnAmmo());
     }
 
     void EnemyDeathHandler()
@@ -41,10 +43,18 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    GameObject GetRandomPowerUp()
+    GameObject GetRandomPowerUp(bool NeedAmmo)
     {
-        int index = (int)Mathf.Round(Random.Range(0, PowerUps.Length));
-        return PowerUps[index];
+        if (NeedAmmo == false)
+        {
+            int index = (int)Mathf.Round(Random.Range(0, PowerUps.Length));
+            return PowerUps[index];
+        }
+        else
+        {
+            GameObject ammo = PowerUps[3];
+            return ammo;
+        }
     }
 
     IEnumerator Spawn()
@@ -65,7 +75,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                GameObject powerUpToSpawn = GetRandomPowerUp();
+                GameObject powerUpToSpawn = GetRandomPowerUp(false);
                 GameObject powerUp = Instantiate(powerUpToSpawn, convertPoint, enemy.transform.rotation);
                 powerUp.transform.parent = this.gameObject.transform;
             }
@@ -79,6 +89,22 @@ public class SpawnManager : MonoBehaviour
                 Destroy(en.gameObject);
             }
         }
+    }
+
+    IEnumerator SpawnAmmo()
+    {
+        yield return new WaitForSeconds(3f);
+        
+        Vector3 spawnPoint = new Vector3(Random.Range(0.1f, 0.9f), 1, 10);
+        Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
+        float random = Random.Range(0, 100);
+
+        if (random < 10)
+        {
+            GameObject newEnemy = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
+            newEnemy.transform.parent = this.gameObject.transform;
+        }
+        StartCoroutine(SpawnAmmo());
     }
 
     void SingletonCheck()

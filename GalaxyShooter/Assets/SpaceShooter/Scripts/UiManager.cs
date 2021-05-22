@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
 
     [SerializeField]
-    TextMeshProUGUI scoreText, GameOverText;
+    TextMeshProUGUI scoreText, GameOverText, ammoDisplay;
 
     [SerializeField]
     Image lives_display, shields_display, GameOverScreen;
@@ -74,6 +74,11 @@ public class UiManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+    }
+
+    public void UpdateAmmoDisplay(int ammo)
+    {
+        ammoDisplay.text = ammo.ToString() + "/15";
     }
 
     public void UpdateLivesDisplay(int value)

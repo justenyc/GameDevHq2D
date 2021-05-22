@@ -53,6 +53,11 @@ public class Collectible : MonoBehaviour
                     OnCollect();
                     break;
 
+                case Type.Ammo:
+                    p.AddAmmo(15);
+                    OnCollect();
+                    break;
+
                 default:
                     Debug.LogError("type not defined or player not found");
                     break;
@@ -75,6 +80,7 @@ public class Collectible : MonoBehaviour
     {
         TripleShot,
         Shield,
-        Speed
+        Speed,
+        Ammo
     };
 }
