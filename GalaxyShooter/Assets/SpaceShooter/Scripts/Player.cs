@@ -54,9 +54,10 @@ public class Player : MonoBehaviour
         ammo = Mathf.Clamp(ammo, 0, 15);
     }
 
-    public void Damage()
+    public void Damage(int amount)
     {
-        lives -= 1;
+        lives += amount;
+        lives = Mathf.Clamp(lives, 0, 3);
 
         UiManager.instance.UpdateLivesDisplay(lives);
 
@@ -64,7 +65,10 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-        Damages[lives].SetActive(true);
+        if (amount > 0)
+            Damages[lives - 1].SetActive(false);
+        else
+            Damages[lives].SetActive(true);
     }
 
     void Die()

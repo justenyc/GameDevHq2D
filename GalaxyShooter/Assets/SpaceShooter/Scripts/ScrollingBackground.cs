@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour
 {
-    [SerializeField] Transform Top, Bottom;
-    [SerializeField] float scrollSpeed = 1f;
+    [SerializeField] Transform First, Second;
+    [SerializeField] float scrollSpeed = 1f, verticalDifference = 21.6f, minimumHeight = -15;
 
     // Update is called once per frame
     void Update()
     {
-        Top.position = new Vector3(Top.position.x, Top.position.y - Time.deltaTime * scrollSpeed, Top.position.z);
-        Bottom.position = new Vector3(Bottom.position.x, Bottom.position.y - Time.deltaTime * scrollSpeed, Bottom.position.z);
+        First.position = new Vector3(First.position.x, First.position.y - Time.deltaTime * scrollSpeed, First.position.z);
+        Second.position = new Vector3(Second.position.x, Second.position.y - Time.deltaTime * scrollSpeed, Second.position.z);
         Repeat();
     }
 
     void Repeat()
     {
-        if (Top.localPosition.y < -15)
+        if (First.localPosition.y < minimumHeight)
         {
-            Top.position = new Vector3(Bottom.position.x, Bottom.position.y + 21.6f, Bottom.position.z);
+            First.position = new Vector3(Second.position.x, Second.position.y + verticalDifference, Second.position.z);
         }
 
-        if (Bottom.localPosition.y < -15)
+        if (Second.localPosition.y < minimumHeight)
         {
-            Bottom.position = new Vector3(Top.position.x, Top.position.y + 21.6f, Top.position.z);
+            Second.position = new Vector3(First.position.x, First.position.y + verticalDifference, First.position.z);
         }
     }
 }

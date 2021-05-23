@@ -58,6 +58,11 @@ public class Collectible : MonoBehaviour
                     OnCollect();
                     break;
 
+                case Type.Life:
+                    p.Damage(1);
+                    OnCollect();
+                    break;
+
                 default:
                     Debug.LogError("type not defined or player not found");
                     break;
@@ -71,7 +76,10 @@ public class Collectible : MonoBehaviour
         AudioSource aSource = this.GetComponent<AudioSource>();
         aSource.Stop();
         aSource.Play();
-        this.GetComponent<SpriteRenderer>().enabled = false;
+
+        foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+            sr.enabled = false;
+
         this.GetComponent<BoxCollider>().enabled = false;
         Destroy(this.gameObject, 1);
     }
@@ -81,6 +89,7 @@ public class Collectible : MonoBehaviour
         TripleShot,
         Shield,
         Speed,
-        Ammo
+        Ammo,
+        Life
     };
 }

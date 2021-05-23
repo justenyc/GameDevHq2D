@@ -67,7 +67,7 @@ public class SpawnManager : MonoBehaviour
             Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
             float random = Random.Range(0, 100);
 
-            if (random > 10)
+            if (random < 1)
             {
                 GameObject newEnemy = Instantiate(enemy, convertPoint, enemy.transform.rotation);
                 newEnemy.transform.parent = this.gameObject.transform;
@@ -101,8 +101,8 @@ public class SpawnManager : MonoBehaviour
 
         if (random < 10)
         {
-            GameObject newEnemy = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
-            newEnemy.transform.parent = this.gameObject.transform;
+            GameObject ammoPU = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
+            ammoPU.transform.parent = this.gameObject.transform;
         }
         StartCoroutine(SpawnAmmo());
     }

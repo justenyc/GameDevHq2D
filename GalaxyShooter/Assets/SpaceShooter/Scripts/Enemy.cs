@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
             case "player":
                 try
                 {
-                    other.GetComponent<Player>().Damage();
+                    other.GetComponent<Player>().Damage(-1);
                 }
                 catch
                 {
