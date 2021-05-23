@@ -100,7 +100,6 @@ public class Enemy : MonoBehaviour
                 break;
 
             default:
-                Die();
                 break;
         }
     }

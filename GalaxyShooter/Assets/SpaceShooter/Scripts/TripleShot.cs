@@ -39,8 +39,9 @@ public class TripleShot : PowerUp
         {
             try
             {
-                Instantiate(GetPlayer().GetLaser(), point1.position, GetPlayer().GetLaser().transform.rotation);
-                Instantiate(GetPlayer().GetLaser(), point2.position, GetPlayer().GetLaser().transform.rotation);
+                GameObject projectile = GetPlayer().GetProjectile();
+                Instantiate(projectile, point1.position, projectile.transform.rotation);
+                Instantiate(projectile, point2.position, projectile.transform.rotation);
             }
             catch
             {

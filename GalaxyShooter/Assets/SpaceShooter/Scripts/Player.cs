@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     [Header("VFX")]
     [SerializeField] GameObject[] Damages;
-    [SerializeField] GameObject laser, deathParticles;
+    [SerializeField] GameObject projectile, deathParticles;
 
     [Header("Misc")]
     [SerializeField] Transform[] ExtraPoints;
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     public void Damage(int amount)
     {
         lives += amount;
-        lives = Mathf.Clamp(lives, 0, 3);
+        lives = Mathf.Clamp(lives, -1, 3);
 
         UiManager.instance.UpdateLivesDisplay(lives);
 
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         {
             Die();
         }
-        if (amount > 0)
+        else if (amount > 0)
             Damages[lives - 1].SetActive(false);
         else
             Damages[lives].SetActive(true);
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
     {
         try
         {
-            Instantiate(laser, transform.position + Vector3.up, Quaternion.identity);
+            Instantiate(projectile, transform.position + Vector3.up, Quaternion.identity);
             ammo--;
         }
         catch
@@ -157,9 +157,14 @@ public class Player : MonoBehaviour
         return fireRate;
     }
 
-    public GameObject GetLaser()
+    public GameObject GetProjectile()
     {
-        return laser;
+        return projectile;
+    }
+
+    public void SetProjectile(GameObject newProjectile)
+    {
+        projectile = newProjectile;
     }
 
     public int GetLives()

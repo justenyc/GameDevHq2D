@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 4352240645025282052}
   - component: {fileID: 5073088062908878023}
   - component: {fileID: 4898855820159080481}
+  - component: {fileID: 8676522484725283770}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -641,7 +642,8 @@ MonoBehaviour:
   - {fileID: 273552937}
   - {fileID: 382348676}
   - {fileID: 1668064077}
-  laser: {fileID: 2522657992782449292, guid: 505d1f284f851e442b24db21d3ab6359, type: 3}
+  projectile: {fileID: 2522657992782449292, guid: 505d1f284f851e442b24db21d3ab6359,
+    type: 3}
   deathParticles: {fileID: 1860382391690043428, guid: 8b93cc52c0f17f24b9df838dfc85a829,
     type: 3}
   ExtraPoints:
@@ -732,6 +734,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8676522484725283770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073088062551506135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a406e86c9441f854f98df4d21ca80e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 2522657992782449292, guid: 505d1f284f851e442b24db21d3ab6359, type: 3}
+  - {fileID: 2522657992782449292, guid: 0a970a9c81280504990634a7dfaa0e14, type: 3}
+  weaponChangeDuration: 5
+  lifeTime: 0
+  player: {fileID: 5073088062551506130}
 --- !u!1 &9091022370716318660
 GameObject:
   m_ObjectHideFlags: 0

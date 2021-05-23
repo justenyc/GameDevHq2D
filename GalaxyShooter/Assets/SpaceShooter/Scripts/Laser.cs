@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float lifeTime = 5f;
+    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float lifeTime = 5f;
+    Material mat;
 
     AudioSource aSource;
     // Start is called before the first frame update
@@ -13,6 +14,11 @@ public class Laser : MonoBehaviour
     {
         aSource = this.GetComponent<AudioSource>();
         aSource.pitch = Random.Range(0.5f, 1.5f);
+        mat = this.GetComponent<TrailRenderer>().material;
+        mat.EnableKeyword("_EmissionColor");
+        mat.SetColor("_EmissionColor", Color.green);
+        mat.EnableKeyword("_Color");
+        mat.SetColor("_Color", Color.green);
 
         Destroy(this.gameObject, lifeTime);
     }

@@ -19,12 +19,12 @@ public class ScrollingBackground : MonoBehaviour
     {
         if (First.localPosition.y < minimumHeight)
         {
-            First.position = new Vector3(Second.position.x, Second.position.y + verticalDifference, Second.position.z);
+            First.localPosition = new Vector3(Second.localPosition.x, Second.localPosition.y + verticalDifference, Second.localPosition.z);
         }
 
         if (Second.localPosition.y < minimumHeight)
         {
-            Second.position = new Vector3(First.position.x, First.position.y + verticalDifference, First.position.z);
+            Second.localPosition = new Vector3(First.localPosition.x, First.localPosition.y + verticalDifference, First.localPosition.z);
         }
     }
 }

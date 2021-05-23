@@ -8,7 +8,7 @@ public class Collectible : MonoBehaviour
     Type type = new Type();
 
     [SerializeField]
-    float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10;
+    float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10, WeaponModDuration = 5;
 
     [SerializeField]
     GameObject Shield_Bubble;
@@ -63,6 +63,11 @@ public class Collectible : MonoBehaviour
                     OnCollect();
                     break;
 
+                case Type.LaserRico:
+                    p.gameObject.GetComponent<WeaponModifier>().SetNewProjectile("Laser_Rico");
+                    OnCollect();
+                    break;
+
                 default:
                     Debug.LogError("type not defined or player not found");
                     break;
@@ -90,6 +95,7 @@ public class Collectible : MonoBehaviour
         Shield,
         Speed,
         Ammo,
-        Life
+        Life,
+        LaserRico
     };
 }

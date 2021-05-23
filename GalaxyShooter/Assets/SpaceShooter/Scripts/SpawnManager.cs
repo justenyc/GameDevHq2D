@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     GameObject[] PowerUps;
 
+    [SerializeField] float SpawnRate = 3, spawnChance = 90;
+
     public static SpawnManager instance;
 
     public delegate void entityDeath();
@@ -59,15 +61,15 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(SpawnRate);
 
         if (FindObjectOfType<Player>())
         {
-            Vector3 spawnPoint = new Vector3(Random.Range(0.1f, 0.9f), 1, 10);
+            Vector3 spawnPoint = new Vector3(Random.Range(0.1f, 0.9f), 1, -Camera.main.transform.position.z);
             Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
             float random = Random.Range(0, 100);
 
-            if (random < 1)
+            if (random < 50)
             {
                 GameObject newEnemy = Instantiate(enemy, convertPoint, enemy.transform.rotation);
                 newEnemy.transform.parent = this.gameObject.transform;
@@ -93,13 +95,13 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnAmmo()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(SpawnRate);
         
-        Vector3 spawnPoint = new Vector3(Random.Range(0.1f, 0.9f), 1, 10);
+        Vector3 spawnPoint = new Vector3(Random.Range(0.1f, 0.9f), 1, -Camera.main.transform.position.z);
         Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
         float random = Random.Range(0, 100);
 
-        if (random < 10)
+        if (random < 5)
         {
             GameObject ammoPU = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
             ammoPU.transform.parent = this.gameObject.transform;
