@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour
             Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
             float random = Random.Range(0, 100);
 
-            if (random < 50)
+            if (random < spawnChance)
             {
                 GameObject newEnemy = Instantiate(enemy, convertPoint, enemy.transform.rotation);
                 newEnemy.transform.parent = this.gameObject.transform;
@@ -101,7 +101,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 convertPoint = Camera.main.ViewportToWorldPoint(spawnPoint);
         float random = Random.Range(0, 100);
 
-        if (random < 5)
+        if (random < 25)
         {
             GameObject ammoPU = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
             ammoPU.transform.parent = this.gameObject.transform;

@@ -74,6 +74,9 @@ public class Player : MonoBehaviour
             Damages[lives - 1].SetActive(false);
         else
             Damages[lives].SetActive(true);
+
+        if (amount < 0)
+            Camera.main.GetComponent<Animator>().Play("CameraShake", -1, 0f);
     }
 
     void Die()

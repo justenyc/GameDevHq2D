@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     void CheckScreenBounds()
     {
         Vector3 viewPortPosition = Camera.main.WorldToViewportPoint(transform.position);
-        
+
         if (viewPortPosition.y < 0)
         {
             Vector3 swapPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), 1, viewPortPosition.z));
@@ -81,14 +81,7 @@ public class Enemy : MonoBehaviour
         switch (other.tag.ToLower())
         {
             case "player":
-                try
-                {
-                    other.GetComponent<Player>().Damage(-1);
-                }
-                catch
-                {
-                    Debug.Log("Player component not found");
-                }
+                other.GetComponent<Player>().Damage(-1);
                 Die();
                 break;
 

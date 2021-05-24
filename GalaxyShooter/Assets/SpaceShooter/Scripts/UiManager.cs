@@ -26,7 +26,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] float enemyScoreValue = 5f;
     [SerializeField] float bossScoreValue = 100f;
 
-    Sprite[] lives;
+    [SerializeField] Sprite[] lives;
 
     // Start is called before the first frame update
     void Awake()
