@@ -8,7 +8,7 @@ public class Collectible : MonoBehaviour
     Type type = new Type();
 
     [SerializeField]
-    float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10, WeaponModDuration = 5;
+    float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10;
 
     [SerializeField]
     GameObject Shield_Bubble;
@@ -23,7 +23,7 @@ public class Collectible : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y + -descentSpeed * Time.deltaTime, transform.position.z);
 
         if (Camera.main.WorldToViewportPoint(transform.position).y < 0)
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 2f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,6 +68,11 @@ public class Collectible : MonoBehaviour
                     OnCollect();
                     break;
 
+                case Type.StealFuel:
+                    p.StealFuel();
+                    OnCollect();
+                    break;
+
                 default:
                     Debug.LogError("type not defined or player not found");
                     break;
@@ -96,6 +101,7 @@ public class Collectible : MonoBehaviour
         Speed,
         Ammo,
         Life,
-        LaserRico
+        LaserRico,
+        StealFuel
     };
 }

@@ -7840,12 +7840,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2423736432216174964, guid: 23af23a85fc8efe44aca3b6bb17a74f5,
-        type: 3}
-      propertyPath: enemyPrefab
-      value: 
-      objectReference: {fileID: 7730888304382194491, guid: aa731c57c0945414aa98228160576a61,
-        type: 3}
     - target: {fileID: 2423736432216174965, guid: 23af23a85fc8efe44aca3b6bb17a74f5,
         type: 3}
       propertyPath: m_Name

@@ -223,4 +223,9 @@ public class Player : MonoBehaviour
     {
         moveSpeed += modifier;
     }
+
+    public void StealFuel()
+    {
+        remainingFuel = 0;
+    }
 }
