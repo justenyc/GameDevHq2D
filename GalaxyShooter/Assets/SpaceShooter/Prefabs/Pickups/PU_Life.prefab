@@ -91,12 +91,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6712215957778746724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8136b7b34b5cb8949ad30198fbae370a, type: 3}
+  m_Script: {fileID: 11500000, guid: a63e138a33bda9841a3e57d1f758c165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   randomColour: {r: 0, g: 0, b: 0, a: 0}
   sr: {fileID: 0}
-  intervalSpeed: 0.1
+  intervalSpeed: 1
 --- !u!1 &6712215958497290558
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,11 +191,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6712215958497290558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a233ba296ee7bb4f93210ed2cadb9e2, type: 3}
+  m_Script: {fileID: 11500000, guid: eca0bc94da2a9d647b63f09b2312d4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  descentSpeed: 5
+  descentSpeed: 1
   TripleShot_Duration: 5
   Speed_Duration: 10
   Shield_Bubble: {fileID: 0}

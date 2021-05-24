@@ -56,10 +56,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7730888304382194491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280fba0964959e54dbfa374f26e57003, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fdb6d0b095c7e448bdeb7ec0ec479b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   deathParticles: {fileID: 2328183607557096969, guid: 71f37c112f39c9945bcbb660cb571a62,
     type: 3}
   moveDirection: {x: 0, y: -1, z: 0}

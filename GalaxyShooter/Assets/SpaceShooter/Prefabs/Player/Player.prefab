@@ -630,19 +630,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5073088062551506135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a873540ed1c0584790d66bfce013d3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 383dc4c46f1b1c941b7a6305c0cf4bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
   ammo: 15
   moveSpeed: 8
-  fireRate: 0.1
+  fireRate: 0.5
   boostSpeed: 3
   fuel: 5
   Damages:
-  - {fileID: 273552937}
-  - {fileID: 382348676}
   - {fileID: 1668064077}
+  - {fileID: 382348676}
+  - {fileID: 273552937}
   projectile: {fileID: 2522657992782449292, guid: 83b2cc62ea92f5948b788d5a7b4c5026,
     type: 3}
   deathParticles: {fileID: 1860382391690043428, guid: 6a06ba6c0a480274989fb4b07baac6f0,
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5073088062551506135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a406e86c9441f854f98df4d21ca80e59, type: 3}
+  m_Script: {fileID: 11500000, guid: b04738a00c4d75b45960e389fe595697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:

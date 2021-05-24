@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1617719929105928874}
   - component: {fileID: 1617719929105928875}
   - component: {fileID: 1617719929105928872}
-  - component: {fileID: 1617719929105928873}
   - component: {fileID: 6717095233742762758}
+  - component: {fileID: 4779218324696247099}
   m_Layer: 0
   m_Name: PU_LaserRico
   m_TagString: PowerUp
@@ -97,24 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1617719929105928873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617719929105928878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a233ba296ee7bb4f93210ed2cadb9e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 5
-  descentSpeed: 5
-  TripleShot_Duration: 5
-  Speed_Duration: 10
-  WeaponModDuration: 5
-  Shield_Bubble: {fileID: 0}
 --- !u!82 &6717095233742762758
 AudioSource:
   m_ObjectHideFlags: 0
@@ -211,3 +193,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4779218324696247099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617719929105928878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca0bc94da2a9d647b63f09b2312d4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
+  descentSpeed: 1
+  TripleShot_Duration: 5
+  Speed_Duration: 10
+  Shield_Bubble: {fileID: 0}
