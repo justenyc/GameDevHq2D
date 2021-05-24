@@ -13,6 +13,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI GameOverText; 
     [SerializeField] TextMeshProUGUI ammoDisplay;
+    [SerializeField] TextMeshProUGUI waveAnnouncer;
 
     [Header("Image Objects")]
     [SerializeField] Image lives_display; 
@@ -124,5 +125,12 @@ public class UiManager : MonoBehaviour
         {
             Debug.Log(displays.Length);
         }
+    }
+    
+    public void UpdateWaveAnnouncer(int wave)
+    {
+        Animator anim = waveAnnouncer.GetComponent<Animator>();
+        waveAnnouncer.text = "Wave " + wave;
+        anim.Play("WaveDisplay", -1, 0f);
     }
 }

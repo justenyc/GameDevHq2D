@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject enemy;
+    [SerializeField] int waveNumber = 0;
+    [SerializeField] int numberToSpawn;
+    [SerializeField] int enemiesSpawned;
+    [SerializeField] int enemiesDefeated = 0;
+
+    [SerializeField] GameObject enemyPrefab;
 
     [SerializeField]
     GameObject[] PowerUps;
@@ -25,7 +29,13 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (enemy != null)
+        numberToSpawn = 10 + waveNumber * 2;
+        NextWave();
+    }
+
+    void BeginSpawning()
+    {
+        if (enemyPrefab != null)
         {
             StartCoroutine(Spawn());
         }
@@ -41,7 +51,11 @@ public class SpawnManager : MonoBehaviour
     {
         if (enemyDeath != null)
         {
+            enemiesDefeated++;
             enemyDeath();
+
+            if (enemiesDefeated == numberToSpawn)
+                NextWave();
         }
     }
 
@@ -59,6 +73,17 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    void NextWave()
+    {
+        waveNumber++;
+        numberToSpawn = 10 + waveNumber * 2;
+        enemiesDefeated = 0;
+        enemiesSpawned = 0;
+        StopAllCoroutines();
+        StartCoroutine(Wait(5f));
+        UiManager.instance.UpdateWaveAnnouncer(waveNumber);
+    }
+
     IEnumerator Spawn()
     {
         yield return new WaitForSeconds(SpawnRate);
@@ -71,14 +96,18 @@ public class SpawnManager : MonoBehaviour
 
             if (random < spawnChance)
             {
-                GameObject newEnemy = Instantiate(enemy, convertPoint, enemy.transform.rotation);
-                newEnemy.transform.parent = this.gameObject.transform;
-                newEnemy.GetComponent<Enemy>().myDeath += EnemyDeathHandler;
+                if (enemiesSpawned < numberToSpawn)
+                {
+                    GameObject newEnemy = Instantiate(enemyPrefab, convertPoint, enemyPrefab.transform.rotation);
+                    newEnemy.transform.parent = this.gameObject.transform;
+                    newEnemy.GetComponent<Enemy>().myDeath += EnemyDeathHandler;
+                    enemiesSpawned++;
+                }
             }
             else
             {
                 GameObject powerUpToSpawn = GetRandomPowerUp(false);
-                GameObject powerUp = Instantiate(powerUpToSpawn, convertPoint, enemy.transform.rotation);
+                GameObject powerUp = Instantiate(powerUpToSpawn, convertPoint, enemyPrefab.transform.rotation);
                 powerUp.transform.parent = this.gameObject.transform;
             }
 
@@ -103,7 +132,7 @@ public class SpawnManager : MonoBehaviour
 
         if (random < 25)
         {
-            GameObject ammoPU = Instantiate(PowerUps[4], convertPoint, enemy.transform.rotation);
+            GameObject ammoPU = Instantiate(PowerUps[4], convertPoint, PowerUps[4].transform.rotation);
             ammoPU.transform.parent = this.gameObject.transform;
         }
         StartCoroutine(SpawnAmmo());
@@ -115,5 +144,11 @@ public class SpawnManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+    }
+
+    IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+        BeginSpawning();
     }
 }
