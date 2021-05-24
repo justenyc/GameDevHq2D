@@ -54,7 +54,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            GameObject ammo = PowerUps[3];
+            GameObject ammo = PowerUps[4];
             return ammo;
         }
     }
@@ -103,7 +103,7 @@ public class SpawnManager : MonoBehaviour
 
         if (random < 25)
         {
-            GameObject ammoPU = Instantiate(PowerUps[3], convertPoint, enemy.transform.rotation);
+            GameObject ammoPU = Instantiate(PowerUps[4], convertPoint, enemy.transform.rotation);
             ammoPU.transform.parent = this.gameObject.transform;
         }
         StartCoroutine(SpawnAmmo());

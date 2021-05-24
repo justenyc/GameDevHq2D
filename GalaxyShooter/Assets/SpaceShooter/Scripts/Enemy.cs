@@ -6,9 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     float moveSpeed = 5f;
+    float timeMovement;
 
     [SerializeField]
     GameObject deathParticles;
+
+    [SerializeField] Vector3 moveDirection = Vector3.down;
 
     public delegate void death();
     public event death myDeath;
@@ -16,6 +19,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveDirection = new Vector3(Mathf.Round(Random.Range(-1f, 1f)), Random.Range(-1, 0), 0);
+        timeMovement = moveSpeed * Time.deltaTime;
         if (deathParticles == null)
         {
             Debug.LogError("Death Particles not found");
@@ -30,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     void Movement()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + (-1 * moveSpeed * Time.deltaTime), transform.position.z);
+        transform.position = new Vector3(transform.position.x + moveDirection.x * timeMovement, transform.position.y + moveDirection.y * timeMovement, transform.position.z);
         CheckScreenBounds();
     }
 
@@ -41,6 +46,17 @@ public class Enemy : MonoBehaviour
         if (viewPortPosition.y < 0)
         {
             Vector3 swapPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), 1, viewPortPosition.z));
+            transform.position = swapPos;
+        }
+
+        if (viewPortPosition.x > 1)
+        {
+            Vector3 swapPos = Camera.main.ViewportToWorldPoint(new Vector3(0f, viewPortPosition.y, viewPortPosition.z));
+            transform.position = swapPos;
+        }
+        else if (viewPortPosition.x < 0)
+        {
+            Vector3 swapPos = Camera.main.ViewportToWorldPoint(new Vector3(1f, viewPortPosition.y, viewPortPosition.z));
             transform.position = swapPos;
         }
     }

@@ -133,7 +133,8 @@ MonoBehaviour:
   descentSpeed: 5
   TripleShot_Duration: 5
   Speed_Duration: 5
-  Shield_Bubble: {fileID: 1584204176297693399, guid: 53ebbc9a23313f24290f5c0b66c1b81d,
+  WeaponModDuration: 5
+  Shield_Bubble: {fileID: 1584204176297693399, guid: 8f5774a73d8eff942a1eccedac20351a,
     type: 3}
 --- !u!82 &-8059108079183954021
 AudioSource:

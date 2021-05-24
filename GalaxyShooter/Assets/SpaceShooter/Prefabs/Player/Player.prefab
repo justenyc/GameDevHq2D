@@ -300,7 +300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &645639680
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645639679}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -638,13 +638,14 @@ MonoBehaviour:
   moveSpeed: 8
   fireRate: 0.1
   boostSpeed: 3
+  fuel: 5
   Damages:
   - {fileID: 273552937}
   - {fileID: 382348676}
   - {fileID: 1668064077}
-  projectile: {fileID: 2522657992782449292, guid: 505d1f284f851e442b24db21d3ab6359,
+  projectile: {fileID: 2522657992782449292, guid: 83b2cc62ea92f5948b788d5a7b4c5026,
     type: 3}
-  deathParticles: {fileID: 1860382391690043428, guid: 8b93cc52c0f17f24b9df838dfc85a829,
+  deathParticles: {fileID: 1860382391690043428, guid: 6a06ba6c0a480274989fb4b07baac6f0,
     type: 3}
   ExtraPoints:
   - {fileID: 1040627441}
@@ -747,8 +748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 2522657992782449292, guid: 505d1f284f851e442b24db21d3ab6359, type: 3}
-  - {fileID: 2522657992782449292, guid: 0a970a9c81280504990634a7dfaa0e14, type: 3}
+  - {fileID: 2522657992782449292, guid: 83b2cc62ea92f5948b788d5a7b4c5026, type: 3}
+  - {fileID: 2522657992782449292, guid: 7d7a420af34a832498ad9c00deeb2dbe, type: 3}
   weaponChangeDuration: 5
   lifeTime: 0
   player: {fileID: 5073088062551506130}

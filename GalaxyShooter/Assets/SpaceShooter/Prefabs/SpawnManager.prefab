@@ -43,13 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2694a57c3691e9142b275236475fc99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7730888304382194491, guid: 72d6762daf226704cbd9a9a8e9d8ab41, type: 3}
+  enemy: {fileID: 7730888304382194491, guid: aa731c57c0945414aa98228160576a61, type: 3}
   PowerUps:
-  - {fileID: 2587886111962638643, guid: 522a59b4ba13ea1409a7d9b206028214, type: 3}
-  - {fileID: 5390685457657699460, guid: a9cc78f371605964da4d1d14fdb5a3e6, type: 3}
-  - {fileID: 1662502590745767698, guid: 028f03f6490234d4e9992a19de0ed308, type: 3}
-  - {fileID: 6561578673619181870, guid: 0637164b9c0e411469ed30a4c8c31567, type: 3}
-  - {fileID: 6712215958497290558, guid: ff2849e67e8e3fd429790549caca3034, type: 3}
-  - {fileID: 1617719929105928878, guid: 9f1ba064762f0974580b9348a7228878, type: 3}
-  SpawnRate: 0.5
+  - {fileID: 1662502590745767698, guid: c391d8664b28e8d4686c69a64ee1cb9b, type: 3}
+  - {fileID: 5390685457657699460, guid: 3c357570ca2b6164f848475b5f5ccac0, type: 3}
+  - {fileID: 2587886111962638643, guid: 90fa3e724302766458410bccc029a124, type: 3}
+  - {fileID: 6712215958497290558, guid: ee0713bf657e7944cb04f3782f22b7a8, type: 3}
+  - {fileID: 6561578673619181870, guid: e41a6b310394882408ee98ee1b355217, type: 3}
+  - {fileID: 1617719929105928878, guid: 38f6e187f21aea2409be196d4efeaf1e, type: 3}
+  SpawnRate: 1
   spawnChance: 90
