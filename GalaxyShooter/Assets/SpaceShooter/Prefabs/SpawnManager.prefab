@@ -52,4 +52,4 @@ MonoBehaviour:
   - {fileID: 6712215958497290558, guid: ff2849e67e8e3fd429790549caca3034, type: 3}
   - {fileID: 1617719929105928878, guid: 9f1ba064762f0974580b9348a7228878, type: 3}
   SpawnRate: 0.5
-  spawnChance: 50
+  spawnChance: 90

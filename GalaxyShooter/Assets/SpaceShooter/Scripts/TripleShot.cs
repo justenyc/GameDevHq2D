@@ -35,7 +35,7 @@ public class TripleShot : PowerUp
 
     void InputListener()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && GetPlayer().GetCanFire() == true)
+        if (Input.GetKeyDown(KeyCode.Space) && GetPlayer().GetCanFire() == true && GetPlayer().GetAmmo() > 0)
         {
             try
             {

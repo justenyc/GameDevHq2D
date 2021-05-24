@@ -9,19 +9,24 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
 
-    [SerializeField]
-    TextMeshProUGUI scoreText, GameOverText, ammoDisplay;
+    [Header("Text Objects")]
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI GameOverText; 
+    [SerializeField] TextMeshProUGUI ammoDisplay;
 
-    [SerializeField]
-    Image lives_display, shields_display, GameOverScreen;
+    [Header("Image Objects")]
+    [SerializeField] Image lives_display; 
+    [SerializeField] Image shields_display;
+    [SerializeField] Image GameOverScreen;
+    [SerializeField] Image fuelBar;
 
-    [SerializeField]
-    float currentScore = 0f, enemyScoreValue = 5f, bossScoreValue = 100f;
 
-    [SerializeField]
+    [Header ("Game Manager Properties")]
+    [SerializeField] float currentScore = 0f;
+    [SerializeField] float enemyScoreValue = 5f;
+    [SerializeField] float bossScoreValue = 100f;
+
     Sprite[] lives;
-
-    public Image[] test;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,7 +37,6 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         SpawnManager.instance.enemyDeath += EnemyDeathHandler;
-        test = shields_display.GetComponentsInChildren<Image>();
     }
 
     private void Update()
@@ -79,6 +83,12 @@ public class UiManager : MonoBehaviour
     public void UpdateAmmoDisplay(int ammo)
     {
         ammoDisplay.text = ammo.ToString() + "/15";
+    }
+
+    public void UpdateFuelDisplay(float amount)
+    {
+        RectTransform rt = fuelBar.GetComponent<RectTransform>();
+        rt.localScale = new Vector3(amount, rt.localScale.y, rt.localScale.z);
     }
 
     public void UpdateLivesDisplay(int value)

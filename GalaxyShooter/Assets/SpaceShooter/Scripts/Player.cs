@@ -6,8 +6,9 @@ public class Player : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private int lives = 3, ammo = 15;
-    [SerializeField] private float moveSpeed = 8, fireRate = 0.5f, boostSpeed = 3;
+    [SerializeField] private float moveSpeed = 8, fireRate = 0.5f, boostSpeed = 3, fuel = 5;
     private bool canFire = true;
+    float remainingFuel = 5, baseMoveSpeed;
 
     [Header("VFX")]
     [SerializeField] GameObject[] Damages;
@@ -17,12 +18,17 @@ public class Player : MonoBehaviour
     [SerializeField] Transform[] ExtraPoints;
 
     Animator animator;
+    SpriteRenderer thruster;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = this.GetComponent<Animator>();
         transform.position = Vector3.zero;
+        fuel = remainingFuel;
+        baseMoveSpeed = moveSpeed;
+        thruster = GameObject.Find("Thruster").GetComponent<SpriteRenderer>();
+
         if (deathParticles == null)
         {
             Debug.LogError("Death Particles not found");
@@ -45,7 +51,6 @@ public class Player : MonoBehaviour
             sr.flipX = true;
         else
             sr.flipX = false;
-
     }
 
     public void AddAmmo(int amount)
@@ -87,17 +92,9 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(FireCooldown());
             }
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                AddSpeed(boostSpeed);
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                AddSpeed(-boostSpeed);
-            }
             UiManager.instance.UpdateAmmoDisplay(ammo);
         }
+        FuelHandler();
     }
 
     IEnumerator FireCooldown()
@@ -117,6 +114,43 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(fireRate);
         canFire = true;
+    }
+
+    void FuelHandler()
+    {
+        if (remainingFuel > 0)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                remainingFuel -= Time.deltaTime;
+            }
+            else
+            {
+                remainingFuel += Time.deltaTime;
+                remainingFuel = Mathf.Clamp(remainingFuel, 0, fuel);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                AddSpeed(boostSpeed);
+                thruster.enabled = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                if (moveSpeed > baseMoveSpeed)
+                {
+                    AddSpeed(-boostSpeed);
+                }
+                thruster.enabled = false;
+            }
+        }
+        else
+        {
+            moveSpeed = baseMoveSpeed;
+            remainingFuel += Time.deltaTime;
+            thruster.enabled = false;
+        }
+        UiManager.instance.UpdateFuelDisplay(remainingFuel / fuel);
     }
 
     void Movement()
@@ -145,6 +179,11 @@ public class Player : MonoBehaviour
             Vector3 edgeWrap = Camera.main.ViewportToWorldPoint(new Vector3(0, viewportPoint.y, viewportPoint.z));
             transform.position = edgeWrap;
         }
+    }
+
+    public float GetAmmo()
+    {
+        return ammo;
     }
 
     public bool GetCanFire()
