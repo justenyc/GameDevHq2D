@@ -20,11 +20,21 @@ public class Shield_Bubble : MonoBehaviour
 
     void TakeDamage(int amount)
     {
+        AudioSource aSource = this.GetComponent<AudioSource>();
         UiManager.instance.UpdateShieldDisplay(-strength);
 
         strength -= amount;
         if (strength < 1)
-            Destroy(this.gameObject);
+        {
+            this.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider>().enabled = false;
+
+            Destroy(this.gameObject, 2f);
+        }
+
+        aSource.pitch = Random.Range(0.5f, 1.5f);
+        aSource.Stop();
+        aSource.Play();
     }
 
     public void AddStrength(int amount)

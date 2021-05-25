@@ -157,6 +157,7 @@ MonoBehaviour:
   moveSpeed: 5
   deathParticles: {fileID: 2328183607557096969, guid: 71f37c112f39c9945bcbb660cb571a62,
     type: 3}
+  shield: {fileID: 4819952749187753807, guid: b9144174913eee3428050847a6775c4f, type: 3}
   laser_enemy: {fileID: 3566221464725770985, guid: f87ffaf58a65ee34bbd3d9993069708b,
     type: 3}
   fireRate: 2

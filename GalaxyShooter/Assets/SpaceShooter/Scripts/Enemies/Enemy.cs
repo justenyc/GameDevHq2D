@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     float timeMovement;
 
     [SerializeField]
-    GameObject deathParticles;
+    GameObject deathParticles, shield;
 
     public Vector3 moveDirection { get; set; } = Vector3.down;
 
@@ -25,6 +25,17 @@ public class Enemy : MonoBehaviour
         if (deathParticles == null)
         {
             Debug.LogError("Death Particles not found");
+        }
+
+        if(shield == null)
+        {
+            Debug.LogError("Enemy Shield Prefab not found");
+        }
+        else
+        {
+            float random = Random.Range(0f, 100f);
+            if (random < 90f)
+                Instantiate(shield, transform.position, shield.transform.rotation, this.transform);
         }
     }
 

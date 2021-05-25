@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
-  descentSpeed: 1
+  descentSpeed: 2
   TripleShot_Duration: 5
   Speed_Duration: 10
   Shield_Bubble: {fileID: 0}

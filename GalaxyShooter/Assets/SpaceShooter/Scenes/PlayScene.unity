@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   First: {fileID: 892392206}
   Second: {fileID: 1462816016}
-  scrollSpeed: 1
+  scrollSpeed: 10
   verticalDifference: 21.6
   minimumHeight: -15
 --- !u!1 &157219730
@@ -6762,7 +6762,7 @@ GameObject:
   - component: {fileID: 1249106167}
   - component: {fileID: 1249106166}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PU_Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

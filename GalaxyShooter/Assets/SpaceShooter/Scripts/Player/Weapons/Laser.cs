@@ -27,6 +27,7 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         if (other.gameObject.tag.ToLower().Contains("enemy"))
         {
             this.GetComponent<SpriteRenderer>().enabled = false;
