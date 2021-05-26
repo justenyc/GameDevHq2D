@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         else
         {
             float random = Random.Range(0f, 100f);
-            if (random < 90f)
+            if (random < 25f)
                 Instantiate(shield, transform.position, shield.transform.rotation, this.transform);
         }
     }
@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Die()
+    public virtual void Die()
     {
         AudioSource aSource = deathParticles.GetComponent<AudioSource>();
         aSource.pitch = Random.Range(0.5f, 1.5f);
@@ -109,6 +109,8 @@ public class Enemy : MonoBehaviour
         switch (other.tag.ToLower())
         {
             case "player":
+                Debug.Log(this.GetComponent<Collider>());
+                Debug.Log(other);
                 other.GetComponent<Player>().Damage(-1);
                 Die();
                 break;
@@ -123,5 +125,11 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void AddMoveSpeed(float value)
+    {
+        moveSpeed += value;
+        timeMovement = moveSpeed * Time.deltaTime;
     }
 }
