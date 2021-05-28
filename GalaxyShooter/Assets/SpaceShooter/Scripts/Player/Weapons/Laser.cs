@@ -14,7 +14,6 @@ public class Laser : MonoBehaviour
     {
         aSource = this.GetComponent<AudioSource>();
         aSource.pitch = Random.Range(0.5f, 1.5f);
-        SetTrailColor(Color.green);
 
         Destroy(this.gameObject, lifeTime);
     }
@@ -25,7 +24,17 @@ public class Laser : MonoBehaviour
         transform.position += transform.up * moveSpeed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
+
+    public float GetLifeTime()
+    {
+        return lifeTime;
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.ToLower().Contains("enemy"))
         {
@@ -37,6 +46,7 @@ public class Laser : MonoBehaviour
 
     public void SetTrailColor(Color newColor)
     {
+        this.GetComponent<SpriteRenderer>().color = newColor;
         mat = this.GetComponent<TrailRenderer>().material;
         mat.EnableKeyword("_EmissionColor");
         mat.SetColor("_EmissionColor", newColor);

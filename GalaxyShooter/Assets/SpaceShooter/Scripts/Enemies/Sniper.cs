@@ -29,7 +29,8 @@ public class Sniper : Enemy
     IEnumerator FireLaser(float intervalInSeconds)
     {
         yield return new WaitForSeconds(intervalInSeconds);
-        Instantiate(laser_enemy, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+        GameObject laser = Instantiate(laser_enemy, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+        laser.GetComponent<Laser_Enemy>().SetTrailColor(Color.red);
         StartCoroutine(FireLaser(intervalInSeconds));
     }
 }

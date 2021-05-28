@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6dbd53d1f8a434d9dd11248401dc99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 5
+  rotateSpeed: 100
 --- !u!135 &5171453549347699112
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   deathParticles: {fileID: 2328183607557096969, guid: 71f37c112f39c9945bcbb660cb571a62,
     type: 3}
   shield: {fileID: 4819952749187753807, guid: b9144174913eee3428050847a6775c4f, type: 3}
-  ramSpeed: 30
+  ramSpeed: 25
 --- !u!1001 &5171453549771433095
 PrefabInstance:
   m_ObjectHideFlags: 0

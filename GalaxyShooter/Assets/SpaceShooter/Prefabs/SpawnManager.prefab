@@ -50,6 +50,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 7730888304382194491, guid: aa731c57c0945414aa98228160576a61, type: 3}
   - {fileID: 8498374324081189631, guid: a14ca44e203d4d4469ce8b6ece10ea9b, type: 3}
+  - {fileID: 5171453550980694145, guid: f2f8db409fb9e9b4baf849407708d119, type: 3}
+  - {fileID: 5382406657910538826, guid: 34feaf0152e85b741b5b5a7ea9a3cdcd, type: 3}
   PowerUps:
   - {fileID: 1662502590745767698, guid: c391d8664b28e8d4686c69a64ee1cb9b, type: 3}
   - {fileID: 5390685457657699460, guid: 3c357570ca2b6164f848475b5f5ccac0, type: 3}
@@ -58,5 +60,5 @@ MonoBehaviour:
   - {fileID: 6561578673619181870, guid: e41a6b310394882408ee98ee1b355217, type: 3}
   - {fileID: 1617719929105928878, guid: 38f6e187f21aea2409be196d4efeaf1e, type: 3}
   - {fileID: 5497814382262471394, guid: fd664b1d19e1a144b9f555054d098397, type: 3}
-  SpawnRate: 3
+  SpawnRate: 1
   spawnChance: 90

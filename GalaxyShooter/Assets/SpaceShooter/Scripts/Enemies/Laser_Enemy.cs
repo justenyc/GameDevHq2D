@@ -9,7 +9,6 @@ public class Laser_Enemy : Laser
     void Start()
     {
         base.Start();
-        base.SetTrailColor(Color.red);
     }
 
     // Update is called once per frame

@@ -102,15 +102,16 @@ public class Player : MonoBehaviour
 
     IEnumerator FireCooldown()
     {
+        GameObject newProjectile = Instantiate(projectile, transform.position + Vector3.up, Quaternion.identity);
         try
         {
-            Instantiate(projectile, transform.position + Vector3.up, Quaternion.identity);
-            ammo--;
+            newProjectile.GetComponent<Laser>().SetTrailColor(Color.green);
         }
         catch
         {
-            Debug.LogError("Prefab not found");
+
         }
+        ammo--;
 
         yield return new WaitForEndOfFrame();
         canFire = false;

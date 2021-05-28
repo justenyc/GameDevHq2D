@@ -2,32 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser_Rico : MonoBehaviour
+public class Laser_Rico : Laser
 {
-    [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float lifeTime = 5f;
-    Material mat;
-
-    AudioSource aSource;
-
     // Start is called before the first frame update
     void Start()
     {
-        aSource = this.GetComponent<AudioSource>();
-        aSource.pitch = Random.Range(0.5f, 1.5f);
-        mat = this.GetComponent<TrailRenderer>().material;
-        mat.EnableKeyword("_EmissionColor");
-        mat.SetColor("_EmissionColor", new Color(0, 0.5f, 1));
-        mat.EnableKeyword("_Color");
-        mat.SetColor("_Color", new Color(0, 0.5f, 1));
-
-        Destroy(this.gameObject, lifeTime);
+        base.Start();
+        SetTrailColor(new Color(0, 0.5f, 1));
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.up * moveSpeed * Time.deltaTime;
+        transform.position += transform.up * base.GetMoveSpeed() * Time.deltaTime;
     }
 
     float CalculateRotationAngle(Transform target)
@@ -55,7 +42,7 @@ public class Laser_Rico : MonoBehaviour
         return nearest;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {

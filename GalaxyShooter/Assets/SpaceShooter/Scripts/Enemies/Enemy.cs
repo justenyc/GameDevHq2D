@@ -47,7 +47,9 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-        transform.position = new Vector3(transform.position.x + moveDirection.x * timeMovement, transform.position.y + moveDirection.y * timeMovement, transform.position.z);
+        transform.position = new Vector3(transform.position.x + moveDirection.x * moveSpeed * Time.deltaTime, 
+                                         transform.position.y + moveDirection.y * moveSpeed * Time.deltaTime, 
+                                         transform.position.z);
         CheckScreenBounds();
     }
 
@@ -109,8 +111,6 @@ public class Enemy : MonoBehaviour
         switch (other.tag.ToLower())
         {
             case "player":
-                Debug.Log(this.GetComponent<Collider>());
-                Debug.Log(other);
                 other.GetComponent<Player>().Damage(-1);
                 Die();
                 break;

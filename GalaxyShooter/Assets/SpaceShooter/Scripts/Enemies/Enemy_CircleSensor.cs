@@ -29,9 +29,12 @@ public class Enemy_CircleSensor : MonoBehaviour
 
     void CircleAlphaByDistance()
     {
-        float distanceAlphaMod = (sc.radius * transform.localScale.x * 1.25f) / Vector3.Distance(this.transform.position, player.position);
-        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 1 * rotateTime));
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, distanceAlphaMod);
+        if (player != null)
+        {
+            float distanceAlphaMod = (sc.radius * transform.localScale.x * 1.25f) / Vector3.Distance(this.transform.position, player.position);
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 1 * rotateTime));
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, distanceAlphaMod);
+        }
     }
 
     void Follow()
