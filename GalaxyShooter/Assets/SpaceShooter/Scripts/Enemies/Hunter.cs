@@ -20,7 +20,7 @@ public class Hunter : Enemy
         fireRateCD = fireRate;
         detector = GetComponentsInChildren<MeshRenderer>()[1].gameObject;
         detectorMat = detector.GetComponent<MeshRenderer>().material;
-        SetDetectorColor(Color.white);
+        SetDetectorColor(Color.red);
         p = GameObject.Find("Player").GetComponent<Player>();
 
         base.Start();
@@ -34,7 +34,7 @@ public class Hunter : Enemy
     {
         fireRateCD -= Time.deltaTime;
         fireRateCD = Mathf.Clamp(fireRateCD, 0, fireRate);
-        DetectPlayer();
+        ChangeDirectionInRelationToPlayer();
         base.Movement();
     }
 
@@ -45,9 +45,9 @@ public class Hunter : Enemy
         StartCoroutine(ChangeDirection());
     }
 
-    void DetectPlayer()
+    void ChangeDirectionInRelationToPlayer()
     {
-        if (fireRateCD <= 0)
+        if (fireRateCD <= 0 && p != null)
         {
             SetDetectorColor(Color.white);
             if (p.transform.position.y < transform.position.y)
@@ -59,7 +59,7 @@ public class Hunter : Enemy
                 ShootRayCast(Vector3.up, Vector3.zero);
             }
         }
-        PositionDetector();
+        ChangeDetectorPosition();
     }
 
     void FireLaser(Vector3 laserRotation)
@@ -68,7 +68,7 @@ public class Hunter : Enemy
         laser.GetComponent<Laser_Enemy>().SetTrailColor(new Color(1, 0, 1));
     }
 
-    void PositionDetector()
+    void ChangeDetectorPosition()
     {
         if (p.transform.position.y < transform.position.y)
         {
@@ -86,6 +86,12 @@ public class Hunter : Enemy
         if (Physics.Raycast(transform.position, direction, out hit, 100f))
         {
             if (hit.collider.tag.ToLower() == "player")
+            {
+                SetDetectorColor(Color.red);
+                FireLaser(laserRot);
+                fireRateCD = fireRate;
+            }
+            else if (hit.collider.tag.ToLower() == "powerup")
             {
                 SetDetectorColor(Color.red);
                 FireLaser(laserRot);

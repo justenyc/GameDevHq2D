@@ -28,57 +28,21 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player p = other.GetComponent<Player>();
-        if (p != null)
+        switch (other.gameObject.tag.ToLower())
         {
-            switch (type)
-            {
-                case Type.TripleShot:
-                    p.gameObject.AddComponent<TripleShot>().SetDuration(TripleShot_Duration);
-                    OnCollect();
-                    break;
+            case "player":
+                Player p = other.GetComponent<Player>();
+                SetPowerUp(p);
+                break;
 
-                case Type.Shield:
-                    Shield_Bubble[] bubbles = p.GetComponentsInChildren<Shield_Bubble>();
-                    if (bubbles.Length < 1)
-                        Instantiate(Shield_Bubble, p.transform.position, Shield_Bubble.transform.rotation, p.gameObject.transform);
-                    else
-                        bubbles[0].AddStrength(1);
+            case "laser_enemy":
+                Destroy(this.gameObject);
+                Debug.Log(other.name);
+                break;
 
-                    OnCollect();
-                    break;
-
-                case Type.Speed:
-                    p.gameObject.AddComponent<Speed>().SetDuration(Speed_Duration);
-                    OnCollect();
-                    break;
-
-                case Type.Ammo:
-                    p.AddAmmo(15);
-                    OnCollect();
-                    break;
-
-                case Type.Life:
-                    p.Damage(1);
-                    OnCollect();
-                    break;
-
-                case Type.LaserRico:
-                    p.gameObject.GetComponent<WeaponModifier>().SetNewProjectile("Laser_Rico");
-                    OnCollect();
-                    break;
-
-                case Type.StealFuel:
-                    p.StealFuel();
-                    OnCollect();
-                    break;
-
-                default:
-                    Debug.LogError("type not defined or player not found");
-                    break;
-            }
+            default:
+                break;
         }
-
     }
 
     void OnCollect()
@@ -92,6 +56,57 @@ public class Collectible : MonoBehaviour
 
         this.GetComponent<BoxCollider>().enabled = false;
         Destroy(this.gameObject, 1);
+    }
+    
+    void SetPowerUp(Player player)
+    {
+        Player p = player;
+        switch (type)
+        {
+            case Type.TripleShot:
+                p.gameObject.AddComponent<TripleShot>().SetDuration(TripleShot_Duration);
+                OnCollect();
+                break;
+
+            case Type.Shield:
+                Shield_Bubble[] bubbles = p.GetComponentsInChildren<Shield_Bubble>();
+                if (bubbles.Length < 1)
+                    Instantiate(Shield_Bubble, p.transform.position, Shield_Bubble.transform.rotation, p.gameObject.transform);
+                else
+                    bubbles[0].AddStrength(1);
+
+                OnCollect();
+                break;
+
+            case Type.Speed:
+                p.gameObject.AddComponent<Speed>().SetDuration(Speed_Duration);
+                OnCollect();
+                break;
+
+            case Type.Ammo:
+                p.AddAmmo(15);
+                OnCollect();
+                break;
+
+            case Type.Life:
+                p.Damage(1);
+                OnCollect();
+                break;
+
+            case Type.LaserRico:
+                p.gameObject.GetComponent<WeaponModifier>().SetNewProjectile("Laser_Rico");
+                OnCollect();
+                break;
+
+            case Type.StealFuel:
+                p.StealFuel();
+                OnCollect();
+                break;
+
+            default:
+                Debug.LogError("type not defined or player not found");
+                break;
+        }
     }
 
     enum Type

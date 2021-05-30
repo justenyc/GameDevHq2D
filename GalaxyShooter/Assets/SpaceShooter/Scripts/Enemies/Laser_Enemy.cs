@@ -17,7 +17,7 @@ public class Laser_Enemy : Laser
         base.Update();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
         switch (other.tag.ToLower())
         {
@@ -31,6 +31,8 @@ public class Laser_Enemy : Laser
                 break;
 
             case "powerup":
+                DisableSelf();
+                Debug.Log(other.name);
                 break;
 
             default:
