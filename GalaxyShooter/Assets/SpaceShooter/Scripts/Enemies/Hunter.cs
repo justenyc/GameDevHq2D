@@ -47,19 +47,22 @@ public class Hunter : Enemy
 
     void ChangeDirectionInRelationToPlayer()
     {
-        if (fireRateCD <= 0 && p != null)
+        if (p != null)
         {
-            SetDetectorColor(Color.white);
-            if (p.transform.position.y < transform.position.y)
+            if (fireRateCD <= 0 && p != null)
             {
-                ShootRayCast(Vector3.down, new Vector3(0, 0, 180));
+                SetDetectorColor(Color.white);
+                if (p.transform.position.y < transform.position.y)
+                {
+                    ShootRayCast(Vector3.down, new Vector3(0, 0, 180));
+                }
+                else
+                {
+                    ShootRayCast(Vector3.up, Vector3.zero);
+                }
             }
-            else
-            {
-                ShootRayCast(Vector3.up, Vector3.zero);
-            }
+            ChangeDetectorPosition();
         }
-        ChangeDetectorPosition();
     }
 
     void FireLaser(Vector3 laserRotation)
@@ -85,7 +88,7 @@ public class Hunter : Enemy
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, 100f))
         {
-            if (hit.collider.tag.ToLower() == "player")
+            if (hit.collider.tag.ToLower().Contains("player"))
             {
                 SetDetectorColor(Color.red);
                 FireLaser(laserRot);

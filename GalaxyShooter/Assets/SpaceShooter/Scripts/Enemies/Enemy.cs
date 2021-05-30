@@ -115,6 +115,10 @@ public class Enemy : MonoBehaviour
                 Die();
                 break;
 
+            case "shield_player":
+                Die();
+                break;
+
             case "laser":
                 Die();
                 break;

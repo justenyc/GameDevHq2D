@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    [SerializeField]
-    Type type = new Type();
+    [SerializeField] Type type = new Type();
 
-    [SerializeField]
-    float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10;
+    [SerializeField] float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10;
 
-    [SerializeField]
-    GameObject Shield_Bubble;
+    [SerializeField] GameObject Shield_Bubble;
 
+    [SerializeField] Vector3 moveDirection = Vector3.down;
+
+    Player player;
+
+    private void Start()
+    {
+        moveDirection = Vector3.down;
+        player = FindObjectOfType<Player>();
+        player.playerMagnet += PlayerMagnetListener;
+        
+    }
     private void Update()
     {
         Movement();
@@ -20,9 +28,10 @@ public class Collectible : MonoBehaviour
 
     void Movement()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + -descentSpeed * Time.deltaTime, transform.position.z);
+        transform.position += moveDirection * descentSpeed * Time.deltaTime;
 
-        if (Camera.main.WorldToViewportPoint(transform.position).y < 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).y < 0 || Camera.main.WorldToViewportPoint(transform.position).y > 1 ||
+            Camera.main.WorldToViewportPoint(transform.position).x < 0 || Camera.main.WorldToViewportPoint(transform.position).x > 1)
             Destroy(this.gameObject, 2f);
     }
 
@@ -55,9 +64,31 @@ public class Collectible : MonoBehaviour
             sr.enabled = false;
 
         this.GetComponent<BoxCollider>().enabled = false;
+        player.playerMagnet -= PlayerMagnetListener;
         Destroy(this.gameObject, 1);
     }
-    
+
+    private void OnDestroy()
+    {
+        if (player != null)
+        {
+            player.playerMagnet -= PlayerMagnetListener;
+        }
+    }
+
+    void PlayerMagnetListener(Transform t)
+    {
+        player.playerMagnet -= PlayerMagnetListener;
+        moveDirection = t.position - this.transform.position;
+        descentSpeed = 5f;
+    }
+
+    void SetMoveDirection(Vector3 newDirection, float newSpeed)
+    {
+        moveDirection = newDirection;
+        descentSpeed = newSpeed;
+    }
+
     void SetPowerUp(Player player)
     {
         Player p = player;
@@ -99,6 +130,7 @@ public class Collectible : MonoBehaviour
                 break;
 
             case Type.StealFuel:
+                p = player;
                 p.StealFuel();
                 OnCollect();
                 break;

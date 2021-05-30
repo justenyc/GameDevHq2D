@@ -26,13 +26,16 @@ public class Laser_Enemy : Laser
                 DisableSelf();
                 break;
 
+            case "shield_player":
+                DisableSelf();
+                break;
+
             case "laser":
                 DisableSelf();
                 break;
 
             case "powerup":
                 DisableSelf();
-                Debug.Log(other.name);
                 break;
 
             default:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
 
     Animator animator;
     SpriteRenderer thruster;
+
+    public delegate void magnet(Transform t);
+    public event magnet playerMagnet;
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +100,15 @@ public class Player : MonoBehaviour
                 StartCoroutine(FireCooldown());
             }
             UiManager.instance.UpdateAmmoDisplay(ammo);
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (playerMagnet != null && remainingFuel >= fuel/2)
+            {
+                remainingFuel -= fuel / 2;
+                playerMagnet(this.transform);
+            }
         }
         FuelHandler();
     }
