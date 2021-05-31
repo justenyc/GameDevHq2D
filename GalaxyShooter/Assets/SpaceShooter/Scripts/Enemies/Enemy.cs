@@ -45,6 +45,12 @@ public class Enemy : MonoBehaviour
         Movement();
     }
 
+    public void AddMoveSpeed(float value)
+    {
+        moveSpeed += value;
+        timeMovement = moveSpeed * Time.deltaTime;
+    }
+
     public void Movement()
     {
         transform.position = new Vector3(transform.position.x + moveDirection.x * moveSpeed * Time.deltaTime, 
@@ -94,6 +100,16 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public GameObject GetDeathParticles()
+    {
+        return deathParticles;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
+
     private void OnDestroy()
     {
         if (myDeath != null)
@@ -106,7 +122,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         switch (other.tag.ToLower())
         {
@@ -129,11 +145,5 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void AddMoveSpeed(float value)
-    {
-        moveSpeed += value;
-        timeMovement = moveSpeed * Time.deltaTime;
     }
 }

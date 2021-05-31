@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] int enemiesDefeated = 0;
 
     [SerializeField] GameObject[] enemyPrefabs;
+    [SerializeField] GameObject boss;
 
     [SerializeField]
     GameObject[] PowerUps;
@@ -35,6 +36,11 @@ public class SpawnManager : MonoBehaviour
 
     void BeginSpawning()
     {
+        if (waveNumber % 5 == 0)
+        {
+            Instantiate(boss, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.8f, -Camera.main.transform.position.z)), boss.transform.rotation, this.transform);
+        }
+
         if (enemyPrefabs.Length > 0)
         {
             StartCoroutine(Spawn());
