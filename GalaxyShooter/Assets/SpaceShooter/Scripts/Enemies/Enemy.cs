@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float score = 5f;
     float timeMovement;
 
     [SerializeField]
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     public Vector3 moveDirection { get; set; } = Vector3.down;
 
-    public delegate void death();
+    public delegate void death(float scoreValue, Enemy self);
     public event death myDeath;
 
     // Start is called before the first frame update
@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
 
         if (myDeath != null)
         {
-            myDeath();
+            myDeath(score, this);
 
             var temp = myDeath.GetInvocationList();
             foreach (var d in temp)
@@ -108,6 +108,11 @@ public class Enemy : MonoBehaviour
     public float GetMoveSpeed()
     {
         return moveSpeed;
+    }
+
+    public float GetScore()
+    {
+        return score;
     }
 
     private void OnDestroy()

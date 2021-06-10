@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 5171453550980694145, guid: f2f8db409fb9e9b4baf849407708d119, type: 3}
   - {fileID: 5382406657910538826, guid: 34feaf0152e85b741b5b5a7ea9a3cdcd, type: 3}
   boss: {fileID: 776129597623119998, guid: 20f934b9c59deab4187001135c48f1a2, type: 3}
+  spawnBoss: 0
   PowerUps:
   - {fileID: 1662502590745767698, guid: c391d8664b28e8d4686c69a64ee1cb9b, type: 3}
   - {fileID: 5390685457657699460, guid: 3c357570ca2b6164f848475b5f5ccac0, type: 3}

@@ -12,17 +12,19 @@ public class TripleShot : PowerUp
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
-        lifeTime = base.GetDuration();
-        point1 = GetPlayer().GetTransforms()[0];
-        point2 = GetPlayer().GetTransforms()[1];
-
         TripleShot[] stacks = GetComponents<TripleShot>();
 
         if (stacks.Length > 1)
         {
             stacks[0].BoostLifetime(base.GetDuration());
             Destroy(this);
+        }
+        else
+        {
+            base.Start();
+            lifeTime = base.GetDuration();
+            point1 = GetPlayer().GetTransforms()[0];
+            point2 = GetPlayer().GetTransforms()[1];
         }
     }
 
@@ -60,6 +62,7 @@ public class TripleShot : PowerUp
         if (base.GetDuration() > 0)
         {
             lifeTime -= Time.deltaTime;
+            base.UpdateDisplay(lifeTime);
 
             if (lifeTime <= 0)
             {

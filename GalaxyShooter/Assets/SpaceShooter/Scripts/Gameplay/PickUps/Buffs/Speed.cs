@@ -10,7 +10,6 @@ public class Speed : PowerUp
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
         Speed[] stacks = GetComponents<Speed>();
         lifeTime = base.GetDuration();
 
@@ -21,6 +20,7 @@ public class Speed : PowerUp
         }
         else
         {
+            base.Start();
             GetPlayer().AddSpeed(bonusSpeed);
         }
     }
@@ -40,6 +40,7 @@ public class Speed : PowerUp
         if (base.GetDuration() > 0)
         {
             lifeTime -= Time.deltaTime;
+            base.UpdateDisplay(lifeTime);
 
             if (lifeTime <= 0)
             {

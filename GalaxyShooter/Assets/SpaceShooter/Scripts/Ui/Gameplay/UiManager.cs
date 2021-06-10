@@ -16,18 +16,22 @@ public class UiManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveAnnouncer;
 
     [Header("Image Objects")]
+    [SerializeField] Image paused_display;
     [SerializeField] Image lives_display; 
     [SerializeField] Image shields_display;
     [SerializeField] Image GameOverScreen;
     [SerializeField] Image fuelBar;
+    [SerializeField] Image PowerUpDisplay;
 
 
     [Header ("Game Manager Properties")]
     [SerializeField] float currentScore = 0f;
     [SerializeField] float enemyScoreValue = 5f;
-    [SerializeField] float bossScoreValue = 100f;
+    [SerializeField] float bossScoreValue = 1000f;
 
     [SerializeField] Sprite[] lives;
+    [SerializeField] int ammoMax = 25;
+    bool paused = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,11 +50,28 @@ public class UiManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (paused == false)
+            {
+                paused = true;
+                paused_display.gameObject.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                paused = false;
+                paused_display.gameObject.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
     }
 
-    void BossDeathHandler()
+    public void AddPowerupDisplay(GameObject powerupDisplayPrefab)
     {
-        UpdateScore(bossScoreValue);
+        GameObject newDisplay = Instantiate(powerupDisplayPrefab, Vector3.zero, Quaternion.identity);
+        newDisplay.transform.parent = PowerUpDisplay.transform;
     }
 
     void DisplayGameOverScreen()
@@ -59,9 +80,9 @@ public class UiManager : MonoBehaviour
         StartCoroutine(FlickerText());
     }
 
-    void EnemyDeathHandler()
+    void EnemyDeathHandler(float value)
     {
-        UpdateScore(enemyScoreValue);
+        UpdateScore(value);
     }
 
     IEnumerator FlickerText()
@@ -71,6 +92,11 @@ public class UiManager : MonoBehaviour
         GameOverText.gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
         StartCoroutine(FlickerText());
+    }
+
+    public Transform GetPowerupDisplay()
+    {
+        return PowerUpDisplay.transform;
     }
 
     void SingletonCheck()
@@ -83,7 +109,7 @@ public class UiManager : MonoBehaviour
 
     public void UpdateAmmoDisplay(int ammo)
     {
-        ammoDisplay.text = ammo.ToString() + "/15";
+        ammoDisplay.text = ammo.ToString() + "/" + ammoMax;
     }
 
     public void UpdateFuelDisplay(float amount)

@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] GameObject boss;
+    [SerializeField] bool spawnBoss;
 
     [SerializeField]
     GameObject[] PowerUps;
@@ -19,7 +20,7 @@ public class SpawnManager : MonoBehaviour
 
     public static SpawnManager instance;
 
-    public delegate void entityDeath();
+    public delegate void entityDeath(float scoreValue);
     public event entityDeath enemyDeath;
 
     private void Awake()
@@ -36,9 +37,11 @@ public class SpawnManager : MonoBehaviour
 
     void BeginSpawning()
     {
-        if (waveNumber % 5 == 0)
+        if (waveNumber % 5 == 0 || spawnBoss == true)
         {
-            Instantiate(boss, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.8f, -Camera.main.transform.position.z)), boss.transform.rotation, this.transform);
+            Boss newBoss = Instantiate(boss, Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.8f, -Camera.main.transform.position.z)), boss.transform.rotation, this.transform)
+                .GetComponent<Boss>();
+            newBoss.myDeath += EnemyDeathHandler;
         }
 
         if (enemyPrefabs.Length > 0)
@@ -53,15 +56,22 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnAmmo());
     }
 
-    void EnemyDeathHandler()
+    void EnemyDeathHandler(float value, Enemy self)
     {
         if (enemyDeath != null)
         {
-            enemiesDefeated++;
-            enemyDeath();
+            if (!(self is Boss))
+            {
+                enemiesDefeated++;
+                enemyDeath(value);
 
-            if (enemiesDefeated == numberToSpawn)
-                NextWave();
+                if (enemiesDefeated == numberToSpawn)
+                    NextWave();
+            }
+            else
+            {
+                enemyDeath(value);
+            }
         }
     }
 

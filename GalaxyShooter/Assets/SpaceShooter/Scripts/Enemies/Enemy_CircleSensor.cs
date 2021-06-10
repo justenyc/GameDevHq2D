@@ -35,6 +35,10 @@ public class Enemy_CircleSensor : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 1 * rotateTime));
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, distanceAlphaMod);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Follow()
@@ -45,7 +49,7 @@ public class Enemy_CircleSensor : MonoBehaviour
         }
     }
 
-    void FollowDeathHandler()
+    void FollowDeathHandler(float value, Enemy enemy)
     {
         Destroy(this.gameObject);
     }

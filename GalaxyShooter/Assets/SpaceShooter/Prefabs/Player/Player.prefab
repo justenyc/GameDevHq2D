@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
-  ammo: 15
+  ammo: 25
   moveSpeed: 8
   fireRate: 0.1
   boostSpeed: 10

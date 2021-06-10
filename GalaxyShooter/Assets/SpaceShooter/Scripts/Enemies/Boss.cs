@@ -7,10 +7,12 @@ public class Boss : Enemy
     [SerializeField] float health = 35;
     [SerializeField] float rotateSpeed = 1;
     [SerializeField] float movementIntervals = 3;
+    [SerializeField] Transform healthbar;
+    float healthbarDiff;
 
     bool attacking = false;
     bool canMove = true;
-    ParticleSystem ps;
+    ParticleSystem parSys;
 
     [SerializeField] GameObject beam;
     [SerializeField] GameObject explosion;
@@ -26,9 +28,10 @@ public class Boss : Enemy
     {
         moveToTarget = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.8f, -Camera.main.transform.position.z));
         p = FindObjectOfType<Player>();
-        ps = GetComponentInChildren<ParticleSystem>();
+        parSys = GetComponentInChildren<ParticleSystem>();
         aSource = GetComponent<AudioSource>();
         rotateSpeedTemp = rotateSpeed;
+        healthbarDiff = healthbar.localScale.x/health;
 
         StartCoroutine(ActionSync(movementIntervals));
     }
@@ -75,6 +78,7 @@ public class Boss : Enemy
     public void Damage(float value)
     {
         health += value;
+        healthbar.localScale = new Vector3(health * healthbarDiff, 1, 1);
 
         GameObject newExplosion = Instantiate(base.GetDeathParticles(), transform.position, base.GetDeathParticles().transform.rotation);
 
@@ -150,8 +154,8 @@ public class Boss : Enemy
 
     void SyncParticles()
     {
-        var main = ps.main;
-        main.startRotation = transform.rotation.eulerAngles.z * -Mathf.Deg2Rad;
+        var main = parSys.main;
+        main.startRotationZ = transform.rotation.eulerAngles.z * -Mathf.Deg2Rad;
     }
 
     IEnumerator ToggleDefaults(float waitTime)

@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     public void AddAmmo(int amount)
     {
         ammo += amount;
-        ammo = Mathf.Clamp(ammo, 0, 15);
+        ammo = Mathf.Clamp(ammo, 0, amount);
     }
 
     public void Damage(int amount)

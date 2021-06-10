@@ -6,7 +6,7 @@ public class Collectible : MonoBehaviour
 {
     [SerializeField] Type type = new Type();
 
-    [SerializeField] float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10;
+    [SerializeField] float descentSpeed = 1, TripleShot_Duration = 5, Speed_Duration = 10, ammo_amount = 25;
 
     [SerializeField] GameObject Shield_Bubble;
 
@@ -17,9 +17,15 @@ public class Collectible : MonoBehaviour
     private void Start()
     {
         moveDirection = Vector3.down;
-        player = FindObjectOfType<Player>();
-        player.playerMagnet += PlayerMagnetListener;
-        
+        try
+        {
+            player = FindObjectOfType<Player>();
+            player.playerMagnet += PlayerMagnetListener;
+        }
+        catch
+        {
+
+        }
     }
     private void Update()
     {
@@ -46,7 +52,6 @@ public class Collectible : MonoBehaviour
 
             case "laser_enemy":
                 Destroy(this.gameObject);
-                Debug.Log(other.name);
                 break;
 
             default:
@@ -95,7 +100,9 @@ public class Collectible : MonoBehaviour
         switch (type)
         {
             case Type.TripleShot:
-                p.gameObject.AddComponent<TripleShot>().SetDuration(TripleShot_Duration);
+                TripleShot newTs = p.gameObject.AddComponent<TripleShot>();
+                newTs.SetDuration(TripleShot_Duration);
+                newTs.SetUiDisplay(this.GetComponentInChildren<RectTransform>().gameObject);
                 OnCollect();
                 break;
 
@@ -110,12 +117,14 @@ public class Collectible : MonoBehaviour
                 break;
 
             case Type.Speed:
-                p.gameObject.AddComponent<Speed>().SetDuration(Speed_Duration);
+                Speed newSpeed = p.gameObject.AddComponent<Speed>();
+                newSpeed.SetDuration(Speed_Duration);
+                newSpeed.SetUiDisplay(this.GetComponentInChildren<RectTransform>().gameObject);
                 OnCollect();
                 break;
 
             case Type.Ammo:
-                p.AddAmmo(15);
+                p.AddAmmo((int)ammo_amount);
                 OnCollect();
                 break;
 
@@ -125,7 +134,9 @@ public class Collectible : MonoBehaviour
                 break;
 
             case Type.LaserRico:
-                p.gameObject.GetComponent<WeaponModifier>().SetNewProjectile("Laser_Rico");
+                WeaponModifier newWM = p.gameObject.GetComponent<WeaponModifier>();
+                newWM.SetNewProjectile("Laser_Rico");
+                newWM.SetUiDisplay(this.GetComponentInChildren<RectTransform>().gameObject);
                 OnCollect();
                 break;
 

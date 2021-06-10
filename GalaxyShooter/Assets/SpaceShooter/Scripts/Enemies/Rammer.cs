@@ -37,7 +37,6 @@ public class Rammer : Enemy
     void PlayerDetectedHandler(Transform player)
     {
         moveDirection = (player.position - transform.position).normalized;
-        Debug.Log(moveDirection);
 
         float xDistance = player.position.x - transform.position.x;
         float yDistance = player.position.y - transform.position.y;
@@ -51,7 +50,6 @@ public class Rammer : Enemy
     void PlayerLostHandler(Transform player)
     {
         this.moveDirection = Vector3.down;
-        Debug.Log(moveDirection);
         this.AddMoveSpeed(-ramSpeed);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
