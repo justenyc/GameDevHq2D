@@ -48,7 +48,7 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && GameOverScreen.gameObject.activeSelf)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
